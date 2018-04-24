@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>Monika Interactive Boop</title>
+	
+    <script type="text/javascript">
+var canvas;
+var ctx;
+var monika1=new Image();
+monika1.src="https://vignette.wikia.nocookie.net/doki-doki-literature-club/images/b/b9/Mon1.png";
+var monika2=new Image();
+monika2.src="https://vignette.wikia.nocookie.net/doki-doki-literature-club/images/5/50/Mon11.png";
+var monika=monika1;
+var frames=0;
+var a;
+
+function begin(){
+	canvas = document.getElementById('canvas');
+	ctx = canvas.getContext('2d');
+	window.setInterval(draw, 15);
+}
+
+function mouseClicked(){
+	monika=monika2;
+	if(frames<=1){
+		frames=1;
+		a=Math.floor(Math.random() * 20);
+	}
+}
+
+function draw(){
+	ctx.fillStyle="white";
+	ctx.fillRect(0, 0, canvas.width, canvas.height);
+	if(frames){
+		frames++;
+	}
+	if(frames>25){
+		monika=monika1;
+		frames=0;
+	}
+	if(monika===monika2){
+		ctx.save();
+		ctx.fillStyle="black";
+		ctx.font="50px Consolas";
+		
+		if(a>13){
+			ctx.translate(100, 200);
+			ctx.rotate((Math.PI / 180) * 335);
+		}else if(a>9){
+			ctx.translate(500, 100);
+			ctx.rotate((Math.PI / 180) * 25);
+		}else if(a>6){
+			ctx.translate(525, 300);
+			ctx.rotate((Math.PI / 180) * 50);
+		}else{
+			ctx.translate(60, 500);
+			ctx.rotate((Math.PI / 180) * 340);
+		}
+		
+		ctx.fillText("*boop*", 0, 0);
+		ctx.restore();
+	}
+	ctx.drawImage(monika, 0, 0, canvas.width, canvas.height);
+}
+	</script>
+    <style type="text/css">
+      canvas { border: 1px solid black; }
+    </style>
+  </head>
+  <body onload="begin();" onclick="mouseClicked();">
+    <canvas id="canvas" width="720" height="720"></canvas>
+  </body>
+ </html>
