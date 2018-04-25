@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>Sayori Interactive Boop</title>
+	
+    <script type="text/javascript">
+var canvas;
+var ctx;
+var sayori1=new Image();
+sayori1.src="Yori1.png";
+var sayori2=new Image();
+sayori2.src="Yori11.png";
+var sayori3=new Image();
+sayori3.src="Yori111.png";
+var sayori4=new Image();
+sayori4.src="Yori1111.png";
+var sayori=sayori1;
+var frames=0;
+var frames2=0;
+var a;
+
+function begin(){
+	canvas = document.getElementById('canvas');
+	ctx = canvas.getContext('2d');
+	window.setInterval(draw, 15);
+}
+
+function mouseClicked(){
+	sayori=sayori2;
+	if(frames<=1){
+		frames=1;
+		a=Math.floor(Math.random() * 20);
+	}
+}
+
+function draw(){
+	ctx.fillStyle="white";
+	ctx.fillRect(0, 0, canvas.width, canvas.height);
+	if(frames){
+		frames++;
+		frames2=0;
+	}else{
+		frames2++;
+	}
+	if(frames>25){
+		sayori=sayori1;
+		frames=0;
+	}
+	if(frames2>500){
+		sayori=sayori4;
+	}else if(frames2>200){
+		sayori=sayori3;
+	}
+	if(sayori===sayori2){
+		ctx.save();
+		ctx.fillStyle="black";
+		ctx.font="50px Consolas";
+		
+		if(a>13){
+			ctx.translate(100, 200);
+			ctx.rotate((Math.PI / 180) * 335);
+		}else if(a>9){
+			ctx.translate(500, 100);
+			ctx.rotate((Math.PI / 180) * 25);
+		}else if(a>6){
+			ctx.translate(525, 300);
+			ctx.rotate((Math.PI / 180) * 50);
+		}else{
+			ctx.translate(60, 500);
+			ctx.rotate((Math.PI / 180) * 340);
+		}
+		
+		ctx.fillText("*boop*", 0, 0);
+		ctx.restore();
+	}
+	ctx.drawImage(sayori, 0, 0, canvas.width, canvas.height);
+}
+	</script>
+    <style type="text/css">
+      #canvas {
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+		margin-top: auto;
+		margin-bottom: auto;
+	  }
+    </style>
+  </head>
+  <body onload="begin();">
+    <canvas id="canvas" width="720" height="720" onclick="mouseClicked();"></canvas>
+  </body>
+ </html>
