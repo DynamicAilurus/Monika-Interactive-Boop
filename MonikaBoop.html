@@ -65,10 +65,16 @@ function draw(){
 }
 	</script>
     <style type="text/css">
-      canvas { border: 1px solid black; }
+      #canvas {
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+		margin-top: auto;
+		margin-bottom: auto;
+	  }
     </style>
   </head>
-  <body onload="begin();" onclick="mouseClicked();">
-    <canvas id="canvas" width="720" height="720"></canvas>
+  <body onload="begin();">
+    <canvas id="canvas" width="720" height="720" onclick="mouseClicked();"></canvas>
   </body>
  </html>
