@@ -11,8 +11,13 @@ var monika1=new Image();
 monika1.src="Mon1.png";
 var monika2=new Image();
 monika2.src="Mon11.png";
+var monika3=new Image();
+monika3.src="Mon111.png";
+var monika4=new Image();
+monika4.src="Mon1111.png";
 var monika=monika1;
 var frames=0;
+var frames2=0;
 var a;
 
 function begin(){
@@ -34,10 +39,18 @@ function draw(){
 	ctx.fillRect(0, 0, canvas.width, canvas.height);
 	if(frames){
 		frames++;
+		frames2=0;
+	}else{
+		frames2++;
 	}
 	if(frames>25){
 		monika=monika1;
 		frames=0;
+	}
+	if(frames2>500){
+		monika=monika4;
+	}else if(frames2>200){
+		monika=monika3;
 	}
 	if(monika===monika2){
 		ctx.save();
