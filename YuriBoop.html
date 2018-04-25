@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>Yuri Interactive Boop</title>
+	
+    <script type="text/javascript">
+var canvas;
+var ctx;
+var yuri1=new Image();
+yuri1.src="Yuri1.png";
+var yuri2=new Image();
+yuri2.src="Yuri11.png";
+var yuri3=new Image();
+yuri3.src="Yuri111.png";
+var yuri4=new Image();
+yuri4.src="Yuri1111.png";
+var yuri=yuri1;
+var frames=0;
+var frames2=0;
+var a;
+
+function begin(){
+	canvas = document.getElementById('canvas');
+	ctx = canvas.getContext('2d');
+	window.setInterval(draw, 15);
+}
+
+function mouseClicked(){
+	yuri=yuri2;
+	if(frames<=1){
+		frames=1;
+		a=Math.floor(Math.random() * 20);
+	}
+}
+
+function draw(){
+	ctx.fillStyle="white";
+	ctx.fillRect(0, 0, canvas.width, canvas.height);
+	if(frames){
+		frames++;
+		frames2=0;
+	}else{
+		frames2++;
+	}
+	if(frames>25){
+		yuri=yuri1;
+		frames=0;
+	}
+	if(frames2>500){
+		yuri=yuri4;
+	}else if(frames2>200){
+		yuri=yuri3;
+	}
+	if(yuri===yuri2){
+		ctx.save();
+		ctx.fillStyle="black";
+		ctx.font="50px Consolas";
+		
+		if(a>13){
+			ctx.translate(100, 200);
+			ctx.rotate((Math.PI / 180) * 335);
+		}else if(a>9){
+			ctx.translate(500, 100);
+			ctx.rotate((Math.PI / 180) * 25);
+		}else if(a>6){
+			ctx.translate(525, 300);
+			ctx.rotate((Math.PI / 180) * 50);
+		}else{
+			ctx.translate(60, 500);
+			ctx.rotate((Math.PI / 180) * 340);
+		}
+		
+		ctx.fillText("*boop*", 0, 0);
+		ctx.restore();
+	}
+	ctx.drawImage(yuri, 0, 0, canvas.width, canvas.height);
+}
+	</script>
+    <style type="text/css">
+      #canvas {
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+		margin-top: auto;
+		margin-bottom: auto;
+	  }
+    </style>
+  </head>
+  <body onload="begin();">
+    <canvas id="canvas" width="720" height="720" onclick="mouseClicked();"></canvas>
+  </body>
+ </html>
